@@ -1,0 +1,253 @@
+package cekilis;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+
+public class arayuz extends javax.swing.JFrame {
+
+    private String dosyaYolu = "";
+    private ArrayList<String> katilanlar = new ArrayList<String>();/*kuraya katılanları katilanlar listesine ekler*/
+
+    private Set<String> kazananlar = new TreeSet<String>();/*bir kazanan sadece bir kere secilsin diye ve sırayla yazılsın diye*/
+
+    private DefaultListModel model = new DefaultListModel();/*listeleme modelini belirtir*/
+
+    public arayuz() {
+        initComponents();/*bileşenler oluştuktan sonra gösterme işlemini gerçekleştirir.*/
+        kazananlarListesi.setModel(model);
+
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jPanel1 = new javax.swing.JPanel();
+        aramaCubugu = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        kazananlarListesi = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(92, 212, 209));
+
+        aramaCubugu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aramaCubuguActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Papyrus", 3, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("                               KAZANANLAR");
+
+        jScrollPane1.setViewportView(kazananlarListesi);
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setText("GÖZAT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("ÇEKİLİŞ YAP");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Copyright SoftRiv, by Fırat TOSUN - 2021");
+
+        jLabel3.setFont(new java.awt.Font("Viner Hand ITC", 3, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("                                         Çek Bi Kura");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(aramaCubugu)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aramaCubugu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton2)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(jLabel2))))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        JFileChooser dosyaSecici = new JFileChooser();
+
+        int i = dosyaSecici.showOpenDialog(this);//dosya seçip seçmediğini denetliyor.
+        if (i == JFileChooser.APPROVE_OPTION) { /*Gözata bastıktan sonra bir dosya seçmişse ve oanaylanmışsa */
+            this.dosyaYolu = dosyaSecici.getSelectedFile().getPath();/*seçilen dosyayı(kurayakatilanlar.tx ) alır*/
+            aramaCubugu.setText(dosyaYolu);/*dosya yolunu yazmamaızı gözattın önundeki text alanına çekmemizi sağlar*/
+
+        }
+    }                                        
+    public void cekilisYap() {
+        try(BufferedReader okuyucu = new BufferedReader(new InputStreamReader(new FileInputStream(dosyaYolu),"ISO8859-9"))){
+            String kisi;/*türkçe karakterleri okumak için ıso8889_9*/
+            while((kisi=okuyucu.readLine()) != null){
+                katilanlar.add(kisi);/*dosyanın elemanlarının hepsini oku */
+            }           
+        } catch (FileNotFoundException ex) {/*hataları yakalama*/
+            Logger.getLogger(arayuz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {/*hataları yakalama*/
+            Logger.getLogger(arayuz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {/*hataları yakalama*/
+            Logger.getLogger(arayuz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while(kazananlar.size() !=10){
+            /*10 tane rastgele değer üretir.*/
+            Random rastgele = new Random();
+            int kazananIndex= rastgele.nextInt(katilanlar.size());
+            
+            kazananlar.add(katilanlar.get(kazananIndex));
+
+            
+        }}
+
+ public void alkisEkle(){
+     try{
+       File stream= new File("alkış.wav");//alkış ses dosyasını alır.
+         Clip clip = AudioSystem.getClip();/*alkış sesini  getirir */
+         clip.open(AudioSystem.getAudioInputStream(stream));
+         clip.start();
+         
+               } catch (Exception e) {/*hata varsa*/
+                   
+                System.err.println(e.getMessage());
+        }
+     }
+  public void olmadiEkle(){
+     try{
+       File stream= new File("olmadi.wav");//alkış ses dosyasını alır.
+         Clip clip = AudioSystem.getClip();/*alkış sesini  getirir */
+         clip.open(AudioSystem.getAudioInputStream(stream));
+         clip.start();
+         
+               } catch (Exception e) {/*hata varsa*/
+                   
+                System.err.println(e.getMessage());
+        }
+     }
+
+
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        if (this.dosyaYolu.equals("")) {/*dosya yolu seçilmemişse*/
+            olmadiEkle();
+            JOptionPane.showMessageDialog(this, "Katılanların Yazılı Olduğu Listeyi Yüklemediniz!.");
+            
+        } else {/*dosya yolu seçilmişse*/
+            cekilisYap();
+            for(String kazanan : kazananlar ){/*tüm kazananaları kazanana stringine atar*/
+                model.addElement(kazanan);/*kazananları lsiteye ekler*/
+            }
+           alkisEkle();/*alkış sesini başlatır.*/
+            
+        }
+    }                                        
+
+    private void aramaCubuguActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+    }                                           
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new arayuz().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField aramaCubugu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> kazananlarListesi;
+    // End of variables declaration                   
+}
